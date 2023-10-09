@@ -1,7 +1,7 @@
 const {Property, Category, Location} = require ("../../db");
 const cloudinary = require("cloudinary").v2
 require("dotenv").config()
-const {CLOUD_NAME, CLOUD_API, CLOUD_SECRET} = process.env
+const { CLOUD_NAME, CLOUD_API, CLOUD_SECRET } = process.env
 cloudinary.config({
     cloud_name: CLOUD_NAME,
     api_key: CLOUD_API,
@@ -9,7 +9,7 @@ cloudinary.config({
 })
 
 
-async function createProperty(form){
+async function createProperty(form) {
     const input = form;
 
 
@@ -22,11 +22,15 @@ async function createProperty(form){
            nightPrice,
            availability,
            homeCapacity,
+           email,
+           password
         }= input
         
         if (!title || !description || !image || !numBaths || !numBeds || !nightPrice || !availability || !homeCapacity){
             throw new Error("Missing required data")
+
         }
+
         const imageUrls = [];
         for (const imageData of image){
             const result = await cloudinary.uploader.upload(imageData,{
@@ -34,6 +38,8 @@ async function createProperty(form){
             });
             imageUrls.push(result.secure_url)
         }
+        await createdProperty.setCategory(category)
+    
 
         const newProperty = {title, description, image: imageUrls, numBaths, numBeds, nightPrice, availability, homeCapacity}
 
@@ -60,4 +66,5 @@ async function createProperty(form){
         console.log(createdProperty)
         return createdProperty
 }
+
 module.exports = createProperty;

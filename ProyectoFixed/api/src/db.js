@@ -3,13 +3,13 @@ const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
-console.log(DB_HOST)
+
 const sequelize = new Sequelize(
-    `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
-    {
-        logging: false, // set to console.log to see the raw SQL queries
-        native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-    }
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+  {
+    logging: false, // set to console.log to see the raw SQL queries
+    native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+  }
 );
 const basename = path.basename(__filename);
 
@@ -37,7 +37,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Property, Sales, PassAdmin, Location, Category, Users, UsersGoogle, Reviews } = sequelize.models;
+const { Property, Sales, PassAdmin, Location, Category, Users, UsersGoogle, Reviews, Reservation } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -61,10 +61,26 @@ Reviews.belongsTo(Users);
 Property.hasMany(Reviews);
 Reviews.belongsTo(Property);
 
-
 Users.hasMany(Property)
 Property.belongsTo(Users)
 
+UsersGoogle.hasMany(Property)
+Property.belongsTo(UsersGoogle)
+
+Property.belongsToMany(Reservation, {
+	through:"Reservation_Property",
+});
+Reservation.belongsTo(Property);
+
+Users.belongsToMany(Reservation, {
+	through:"Reservation_User",
+});
+Reservation.belongsTo(Users);
+
+UsersGoogle.belongsToMany(Reservation, {
+	through:"Reservation_UserGoogle",
+});
+Reservation.belongsTo(UsersGoogle);
 
 module.exports = {
     ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

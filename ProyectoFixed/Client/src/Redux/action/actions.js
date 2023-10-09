@@ -1,5 +1,50 @@
 import axios from 'axios';
-import {FILTER_CATEGORY, FILTER_LOCATION, GET_CATEGORYS, GET_LOCATIONS, GET_PROPERTY, POST_PROPERTY, GET_DETAIL, CREATE_USER} from './type-actions'
+import { GET_PROPERTY, POST_PROPERTY, GET_CATEGORYS, FILTER_CATEGORY, FILTER_LOCATION, GET_LOCATIONS, GET_DETAIL, CREATE_USER, SET_AUTH_STATUS } from './type-actions';
+
+export const getLogin = (formData) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post('http://localhost:3001/user/login', formData);
+      if (response.status === 200) {
+        dispatch({
+          type: LOGIN_USER,
+          payload: {status:200}
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: LOGIN_USER,
+        payload: { status: 401 },
+      });
+}
+  }
+}
+
+export const googleRegister = (userData) =>{
+  return async function (dispatch) {
+    try{
+      const response = await axios.post(`http://localhost:3001/user/googleLogin`, userData);
+      dispatch({type: CREATE_USER, payload: response})
+      dispatch({type: SET_AUTH_STATUS, payload: true})
+    }catch(error){
+  console.error(error);
+
+}
+}
+}
+
+export const createUser = (postForm) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post('http://localhost:3001/user/create', postForm);
+      dispatch({ type: CREATE_USER, payload: response.data });
+      dispatch({type: SET_AUTH_STATUS, payload: true})
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
 
 export const getCars = () => {
   return async (dispatch)=> {
@@ -114,14 +159,3 @@ export const getDetail = (idHouse) => {
   };
 };
 
-export const createUser = (postForm) =>{
-  return async function (req, res){
-try {
-  const response = axios.post(`http://localhost:3001/user/create`, postForm)
-  dispatch({type: CREATE_USER, payload: response})
-  
-} catch (error) {
-  console.error(error);  
-}
-  }
-}
