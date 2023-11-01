@@ -4,7 +4,8 @@
  margin-right: 20rem;
  margin-left: 10rem;
  margin-top: 4rem;
- border-radius: 20px;
+ border-radius: 40px;
+ border: 2px solid rgb(18, 154, 97) ;
 }
 .parrafo{
     line-height: 1.2; /* Ajusta según tus necesidades */
@@ -13,4 +14,27 @@
   overflow: hidden;
   text-overflow: ellipsis; /* Agregar puntos suspensivos si el contenido es demasiado largo */
   white-space:inherit; 
+}
+
+
+.text {
+      font-size: 6rem/* 96px */;
+      line-height: 1;
+      background: linear-gradient(to right, #000, #287579);
+
+      -webkit-background-clip: text; 
+      background-clip: text;/* Para navegadores basados en WebKit (como Chrome y Safari) */
+      color: transparent;
+      padding-right:10px;
+      display:inline;
+      
+}
+.text1 {
+  font-size: 6rem/* 96px */;
+  line-height: 1;
+  background: linear-gradient(to right, #000, #287579);
+  -webkit-background-clip: text; 
+  background-clip: text;/* Para navegadores basados en WebKit (como Chrome y Safari) */
+  color: transparent;
+  display:inline;
 }

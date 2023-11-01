@@ -1,16 +1,20 @@
 import React from "react";
 import style from "./View.module.css";
 import { Cards } from "./Cards/Cards";
+
+
 export const View = () => {
   return (
     <div className="">
-      <section className="w-full flex justify-center items-center ">
+      <section id="home" className="w-full flex justify-center items-center h-screen ">
         <div className=" ">
           <img className={style.imgMe} src="./foto.png" alt="holacomovas" />
         </div>
         <div>
-          <h1 className="text-8xl mb-4">Omar</h1>
-          <h1 className="text-8xl mb-4 ml-12">Sampayo</h1>
+          <h1 class="text-8xl mb-4" className={style.text}>Omar</h1>
+          <div>
+          <h1 class="text-8xl mb-4 ml-12" className={style.text1}>Sampayo</h1>
+          </div>
           <h3 className="text-4xl mt-8">Full-Stack Web Developer</h3>
           <p className=" mt-8">
             I'm 18 years old and I'm from Valencia, Venezuela. Over the last
@@ -24,8 +28,8 @@ export const View = () => {
           </p>
         </div>
       </section>
-      <section className=" ">
-        <div className="flex justify-center mt-32">
+      <section id="exterprise" className="pt-32 pb-44">
+        <div className="flex justify-center">
           <h1 className="text-7xl">My Exterprise</h1>
         </div>
         <div className="w-full flex justify-center items-center mt-32">
@@ -70,19 +74,19 @@ export const View = () => {
           </div>
         </div>
       </section>
-      <section className="w-full flex justify-center items-center mt-32 h-96">
+      <section id="projects" className="w-full flex justify-center items-center h-96">
         <div>
           <h1 className="text-7xl">My Projects</h1>
           <Cards />
         </div>
       </section>
-      <section className="mt-16 pb-16">
+      <section id="contactme" className="pt-16 pb-32">
         <h1 className="text-7xl text center flex justify-center items-center mb-32">
           Contact Me
         </h1>
 
-        <div className="w-full flex justify-center items-center h-96 ">
-          <div className="mr-96">
+        <div className="w-full flex justify-center items-center h-96 text-center ">
+          <div className="">
             <div className="mb-16 text-3xl">
             <h1>Available to work opportunities</h1>
             </div>
@@ -91,8 +95,13 @@ export const View = () => {
               Have an exciting project you need help with?<br /> Send me an email or
               contact me via <br />instant message!
             </p>
+              <div className="mt-8">
+               <button> 
+                Calendly
+                </button>
+              </div>
                 </div>
-                <div className="flex mt-16">
+                <div className="flex mt-16 ml-12 ">
                 <div className="flex flex-wrap flex-col items-center mr-16 justify-around">
                     <img src="./icons8-twitter.svg" alt="" />
                     <img src="./icons8-linkedin.svg" alt="" />
@@ -111,11 +120,7 @@ export const View = () => {
                 </div>
                 </div>
           </div>
-          <div className="mr-32 ml-32">
-            <button> 
-                Calendly
-                </button>
-                </div>
+         
         </div>
       </section>
     </div>
