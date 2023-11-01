@@ -1,0 +1,16 @@
+.imgMe{
+ width: 40vh;
+ height: 50vh;
+ margin-right: 20rem;
+ margin-left: 10rem;
+ margin-top: 4rem;
+ border-radius: 20px;
+}
+.parrafo{
+    line-height: 1.2; /* Ajusta según tus necesidades */
+  font-size: 14px; /* Ajusta el tamaño de fuente según tus necesidades */
+  height: 12.6em; /* Multiplica la altura de línea por la cantidad de líneas deseadas */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Agregar puntos suspensivos si el contenido es demasiado largo */
+  white-space:inherit; 
+}
